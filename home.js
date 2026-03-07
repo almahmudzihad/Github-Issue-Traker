@@ -1,4 +1,5 @@
 
+
 function activeRemove(id) {
    const allBtn = document.getElementById("allBtn");
    const openBtn = document.getElementById("openBtn");
@@ -6,7 +7,10 @@ function activeRemove(id) {
     const allissue = document.getElementById('issueContainer');
    const openSection = document.getElementById('openIssues');
    const closeSection = document.getElementById('closedIssues')
-   console.log(id);
+
+   const issueCount = document.getElementById('issueCount');
+   
+
    if (id === "allBtn") {
     allBtn.classList.add("bg-[#4a00ff]", "text-white");
     openBtn.classList.remove("bg-[#4a00ff]", "text-white");
@@ -14,6 +18,7 @@ function activeRemove(id) {
     allissue.classList.remove("hidden");
     openSection.classList.add("hidden");
     closeSection.classList.add("hidden");
+        issueCount.textContent = allissue.children.length;
    } else if (id === "openBtn") {
     allBtn.classList.remove("bg-[#4a00ff]", "text-white");
     openBtn.classList.add("bg-[#4a00ff]", "text-white");
@@ -21,6 +26,7 @@ function activeRemove(id) {
     allissue.classList.add("hidden");
     openSection.classList.remove("hidden");
     closeSection.classList.add("hidden");
+        issueCount.textContent = openSection.children.length;
    } else if (id === "closedBtn") {
     allBtn.classList.remove("bg-[#4a00ff]", "text-white");
     openBtn.classList.remove("bg-[#4a00ff]", "text-white");
@@ -28,10 +34,11 @@ function activeRemove(id) {
     allissue.classList.add("hidden");
     openSection.classList.add("hidden");
     closeSection.classList.remove("hidden");
+        issueCount.textContent = closeSection.children.length;
    }
 };
 const createElement = (arr) => {
-    const htmlElement = arr.map(el => `<span class="bg-yellow-200 p-1 m-1 rounded-md">${el}</span>`).join(' ');
+    const htmlElement = arr.map(el => `<span class="bg-yellow-200 p-1 m-1 rounded-md"><i class="fa-solid fa-bug"></i> ${el}</span>`).join(' ');
     return htmlElement;
 };
 
