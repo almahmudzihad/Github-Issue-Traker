@@ -28,6 +28,8 @@ const issueLoad = () => {
     .then(response => response.json())
     .then(data => {
         displayIssues(data.data);
+        displayOpenIssues(data.data);
+        displayClosedIssues(data.data);
     })
     .catch(error => {
         console.error('Error fetching issues:', error);
@@ -37,7 +39,6 @@ issueLoad();
 
 
 const displayIssues = (data) => {
-    console.log(data.data);
     const issueContainer = document.getElementById('issueContainer');
     issueContainer.innerHTML = '';
    data.forEach(issue => {
@@ -66,3 +67,61 @@ const displayIssues = (data) => {
         issueContainer.appendChild(issueDiv);
    });
 }   
+const displayOpenIssues = (data) => {
+    const issueContainer = document.getElementById('openIssues');
+    issueContainer.innerHTML = '';
+   data.forEach(issue => {
+        const issueDiv = document.createElement('div');
+        issueDiv.classList.add('bg-white', 'p-4', 'rounded-lg', 'shadow-md', 'mb-4', 'space-y-2'); 
+        if(issue.status === "open"){
+            issueDiv.classList.add('border-t-4', 'border-green-500');
+            issueDiv.innerHTML = `
+            <div class="flex items-center justify-between">
+                <img src="./assets/Open-Status.png" alt="${issue.author}" class="w-10 h-10 rounded-full mb-2">
+                <p class="text-lg text-gray-500 mb-1 btn rounded-full bg-red-200">${issue.priority}</p>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">${issue.title}</h3>
+            <p class="text-gray-600 mb-2">${issue.description}</p>
+            <span class="text-sm text-gray-500 mb-1 mr-1">${createElement(issue.labels)}</span>
+            <div class=" mt-4">
+                <p class="text-sm text-gray-500 mb-1">Author: ${issue.author}</p>
+                <p class="text-sm text-gray-500 mb-1">${issue.updatedAt}</p>
+            </div>
+
+        `;
+            issueContainer.appendChild(issueDiv);
+        }   
+        
+        
+   });
+
+}
+const displayClosedIssues = (data) => {
+    const issueContainer = document.getElementById('closedIssues');
+    issueContainer.innerHTML = '';
+   data.forEach(issue => {
+        const issueDiv = document.createElement('div');
+        issueDiv.classList.add('bg-white', 'p-4', 'rounded-lg', 'shadow-md', 'mb-4', 'space-y-2'); 
+        if(issue.status === "closed"){
+            issueDiv.classList.add('border-t-4', 'border-violet-500');
+            issueDiv.innerHTML = `
+            <div class="flex items-center justify-between">
+                <img src="./assets/Open-Status.png" alt="${issue.author}" class="w-10 h-10 rounded-full mb-2">
+                <p class="text-lg text-gray-500 mb-1 btn rounded-full bg-red-200">${issue.priority}</p>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">${issue.title}</h3>
+            <p class="text-gray-600 mb-2">${issue.description}</p>
+            <span class="text-sm text-gray-500 mb-1 mr-1">${createElement(issue.labels)}</span>
+            <div class=" mt-4">
+                <p class="text-sm text-gray-500 mb-1">Author: ${issue.author}</p>
+                <p class="text-sm text-gray-500 mb-1">${issue.updatedAt}</p>
+            </div>
+
+        `;
+            issueContainer.appendChild(issueDiv);
+        }   
+        
+        
+   });
+
+}
