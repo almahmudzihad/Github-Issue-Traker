@@ -3,19 +3,31 @@ function activeRemove(id) {
    const allBtn = document.getElementById("allBtn");
    const openBtn = document.getElementById("openBtn");
    const closedBtn = document.getElementById("closedBtn");
+    const allissue = document.getElementById('issueContainer');
+   const openSection = document.getElementById('openIssues');
+   const closeSection = document.getElementById('closedIssues')
    console.log(id);
    if (id === "allBtn") {
     allBtn.classList.add("bg-[#4a00ff]", "text-white");
     openBtn.classList.remove("bg-[#4a00ff]", "text-white");
     closedBtn.classList.remove("bg-[#4a00ff]", "text-white");
+    allissue.classList.remove("hidden");
+    openSection.classList.add("hidden");
+    closeSection.classList.add("hidden");
    } else if (id === "openBtn") {
     allBtn.classList.remove("bg-[#4a00ff]", "text-white");
     openBtn.classList.add("bg-[#4a00ff]", "text-white");
     closedBtn.classList.remove("bg-[#4a00ff]", "text-white");
+    allissue.classList.add("hidden");
+    openSection.classList.remove("hidden");
+    closeSection.classList.add("hidden");
    } else if (id === "closedBtn") {
     allBtn.classList.remove("bg-[#4a00ff]", "text-white");
     openBtn.classList.remove("bg-[#4a00ff]", "text-white");
     closedBtn.classList.add("bg-[#4a00ff]", "text-white");
+    allissue.classList.add("hidden");
+    openSection.classList.add("hidden");
+    closeSection.classList.remove("hidden");
    }
 };
 const createElement = (arr) => {
