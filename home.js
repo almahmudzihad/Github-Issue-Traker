@@ -1,4 +1,6 @@
+let activeBtn = "allBtn";
 
+const issueCount = document.getElementById('issueCount');
 
 function activeRemove(id) {
    const allBtn = document.getElementById("allBtn");
@@ -8,7 +10,7 @@ function activeRemove(id) {
    const openSection = document.getElementById('openIssues');
    const closeSection = document.getElementById('closedIssues')
 
-   const issueCount = document.getElementById('issueCount');
+   
    
 
    if (id === "allBtn") {
@@ -100,6 +102,7 @@ const displayIssues = (data) => {
         `;
         issueContainer.appendChild(issueDiv);
    });
+   issueCount.textContent = data.length;
    showSpinner('hide');
 }   
 const displayOpenIssues = (data) => {
@@ -202,3 +205,21 @@ const displayModal = (data) => {
     `;
     document.getElementById('my_modal').showModal();
 }
+
+document.getElementById('search-btn').addEventListener('click', () => {
+    activeRemove(activeBtn);
+    const searchInput = document.getElementById('search-input').value.trim().toLowerCase();
+    
+
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchInput}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        displayIssues(data.data);
+        
+    })
+    .catch(error => {
+        console.error('Error searching issues:', error);
+    });
+
+});
