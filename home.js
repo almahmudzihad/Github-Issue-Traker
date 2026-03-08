@@ -38,7 +38,7 @@ function activeRemove(id) {
    }
 };
 const createElement = (arr) => {
-    const htmlElement = arr.map(el => `<span class="bg-yellow-200 p-1 m-1 rounded-md"><i class="fa-solid fa-bug"></i> ${el}</span>`).join(' ');
+    const htmlElement = arr.map(el => `<span class="bg-yellow-200 p-1 m-1 rounded-md"><i class="fa-solid fa-virus"></i></i> ${el}</span>`).join(' ');
     return htmlElement;
 };
 
@@ -70,6 +70,7 @@ const displayIssues = (data) => {
             issueDiv.classList.add('border-t-4', 'border-violet-500');
         }  
         issueDiv.innerHTML = `
+            <div onclick="modalLoad(${issue.id})">
             <div class="flex items-center justify-between">
                 <img src="./assets/Open-Status.png" alt="${issue.author}" class="w-10 h-10 rounded-full mb-2">
                 <p class="text-lg text-gray-500 mb-1 btn rounded-full bg-red-200">${issue.priority}</p>
@@ -80,6 +81,7 @@ const displayIssues = (data) => {
             <div class=" mt-4">
                 <p class="text-sm text-gray-500 mb-1">Author: ${issue.author}</p>
                 <p class="text-sm text-gray-500 mb-1">${issue.updatedAt}</p>
+            </div>
             </div>
 
         `;
@@ -95,6 +97,7 @@ const displayOpenIssues = (data) => {
         if(issue.status === "open"){
             issueDiv.classList.add('border-t-4', 'border-green-500');
             issueDiv.innerHTML = `
+            <div onclick="modalLoad(${issue.id})">
             <div class="flex items-center justify-between">
                 <img src="./assets/Open-Status.png" alt="${issue.author}" class="w-10 h-10 rounded-full mb-2">
                 <p class="text-lg text-gray-500 mb-1 btn rounded-full bg-red-200">${issue.priority}</p>
@@ -105,6 +108,7 @@ const displayOpenIssues = (data) => {
             <div class=" mt-4">
                 <p class="text-sm text-gray-500 mb-1">Author: ${issue.author}</p>
                 <p class="text-sm text-gray-500 mb-1">${issue.updatedAt}</p>
+            </div>
             </div>
 
         `;
@@ -124,6 +128,7 @@ const displayClosedIssues = (data) => {
         if(issue.status === "closed"){
             issueDiv.classList.add('border-t-4', 'border-violet-500');
             issueDiv.innerHTML = `
+            <div onclick="modalLoad(${issue.id})">
             <div class="flex items-center justify-between">
                 <img src="./assets/Open-Status.png" alt="${issue.author}" class="w-10 h-10 rounded-full mb-2">
                 <p class="text-lg text-gray-500 mb-1 btn rounded-full bg-red-200">${issue.priority}</p>
@@ -135,6 +140,7 @@ const displayClosedIssues = (data) => {
                 <p class="text-sm text-gray-500 mb-1">Author: ${issue.author}</p>
                 <p class="text-sm text-gray-500 mb-1">${issue.updatedAt}</p>
             </div>
+            </div>
 
         `;
             issueContainer.appendChild(issueDiv);
@@ -143,4 +149,40 @@ const displayClosedIssues = (data) => {
         
    });
 
+}
+const modalLoad = (id) => {
+    const url =`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        displayModal(data.data);
+        
+    }
+    )
+    .catch(error => {
+        console.error('Error fetching issue details:', error);
+    });
+}
+const displayModal = (data) => {
+    console.log(data);
+    const modalBox = document.getElementById('modalContent');
+    modalBox.innerHTML = `
+        <h3 class="text-2xl font-bold mb-2">${data.title}</h3>
+        <p class="text-sm text-gray-500 mb-4"><span class = "bg-green-500 py-1 px-3 rounded-full text-white">${data.status}</span><span class="ml-2">Opened by ${data.assignee}</span><span class="ml-2"> ${data.updatedAt}</span> </p>
+        <div>
+            <span class="text-sm text-gray-500 mb-1 mr-1">${createElement(data.labels)}</span>
+        </div>
+        <p class="py-4 text-[#64748b]">${data.description}</p>
+        <div class="flex items-center  space-x-48">
+            <div>
+                <p class="text-sm text-gray-500 mb-1">Assaign:</p>
+                <p class="text-lg  text-gray-500 mb-1">${data.assignee}</p>
+            </div>
+            <div>
+                <p class="text-sm text-gray-500 mb-1">priority:</p>
+                <p class="text-sm bg-red-500 py-1 px-3 rounded-full text-white mb-1">${data.priority}</p>
+            </div>
+        </div>
+    `;
+    document.getElementById('my_modal').showModal();
 }
