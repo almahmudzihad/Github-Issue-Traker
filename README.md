@@ -1,81 +1,3 @@
-
-
-# Assignment-05: GitHub Issues Tracker
-
-###  **All Issues:** 
-  - https://phi-lab-server.vercel.app/api/v1/lab/issues 
-
-###  **Single Issue:**
-   - https://phi-lab-server.vercel.app/api/v1/lab/issue/{id}
-
-   - Example: https://phi-lab-server.vercel.app/api/v1/lab/issue/33
-
-
-###  **Search Issue:** https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q={searchText}
-
-   - Example:  https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=notifications
-
-
----
-
-## 📝 Main Requirements
-
-## 🎨 Design Part
-
-## Login Page
-- Create a login page containing a logo, title, and sub-title
-- Below that, there will be 2 inputs, a sign-in button, and a demo credential to sign in. Follow the Figma for this page 
-- Styled as per Figma
-
-## Main Page: 
-
-### Navbar: 
-
-- Navbar with website logo/name on the left
-- Search input and button on the right
-
-### Tab Section like Figma: 
-
-- 3 tab ( All, Open, Closed) at the top of this section.(**All**, **Open**, **Closed**)
-
-- Below the tab, there will be an icon, the issue count, some text on the left, and an open and closed marker on the right
-
-- Responsiveness: The website should be responsive for mobile devices. It is totally up to you. 
-
-
---- 
-
-
-## ⚙️ Functionalities
-- In login page, there will be default admin credentials (username, password). You need to sign in using these credentials.
-
-- Load all issues and display as per Figma
-
-- On clicking on an open or closed tab, it will load the issues data of the related tab and show it in a display-like card in a 4-column layout like Figma. By default, it will show all data 
-
-- Each card shows:
-  - Title
-  - Description
-  - Status
-  - Category
-  - Author
-  - Priority
-  - Label
-  - CreatedAt
-- Clicking on a tree name in a card will open a modal and show all the information about that Issue. 
-
-### 🚀 Challenges
-
-
-- Show the card Top border based on their category(open, closed), open card will have Green Boder, closed card will have a purple border on top. 
-
-- Loading spinner on data load
-
-- Show active button on changing category names
-
-- Implement Search Functionality and 8 meaningful github commit.  
-
-- Create a readme file and answer this question on your own. Don’t copy-paste from Google or any AI chatbot. 
     - 1️⃣ What is the difference between var, let, and const?
     - 2️⃣ What is the spread operator (...)?
     - 3️⃣ What is the difference between map(), filter(), and forEach()?
@@ -83,38 +5,38 @@
     - 5️⃣ What are template literals?
 
 
----
+### 1. var vs. let vs. const
+In the past, JavaScript only had 'var', but modern development relies on 'let' and 'const' for better stability.
 
-## 🛠️ Technology Stack
+var: The old way. It is function-scoped and can be re-declared anywhere. It often causes issues because it doesn't respect block boundaries (like if statements or loops).
+let: Introduced in ES6. It is block-scoped (stays inside { }). You can update its value, but you cannot re-declare it in the same scope.
+const: Short for constant. Like let, it is block-scoped. However, once you assign a value, you cannot re-assign it. Use this by default unless you know the value must change.
 
-- **HTML**
-- **CSS** (Vanilla/Tailwind/DaisyUI)
-- **JavaScript** (Vanilla)
+### 2. The Spread Operator (...)
+The spread operator consists of three dots (...). It allows you to spread or unpack elements from an array or object into a new one. 
 
----
+It’s incredibly useful for:
+- Copying arrays or objects without mutating the original.
+- Merging multiple arrays into one.
+- Passing array elements as individual arguments to a function.
 
-## 🔑 Demo Credentials
+### 3. map() vs. filter() vs. forEach()
+All three are used to iterate over arrays, but they serve different purposes:
 
-```text
-Username: admin
-Password: admin123
-```
+forEach(): Just a simple loop. It executes a function for every item but returns nothing (undefined). Use it when you just need to perform an action (like logging).
+map(): Transforms an array. It runs through every element and returns a new array of the same length with modified values.
+filter(): The "selector." It checks every element against a condition and returns a new array containing only the items that passed the test.
 
-
----
-
-### Optional: 
- - No need to show status: Open, Closed styles On modals. 
- - No Need to show icon on labels 
- - No need to apply styles on Priority 
---- 
-
-
-## 📤 What to submit
-
-- **GitHub Repository Link:**
-- **Live Site Link:**
-
----
+### 4. Arrow Functions
+Arrow functions provide a shorter syntax for writing functions. They remove the need for the function keyword and use the => symbol.
 
 
+### 5. Template Literals
+Template literals are a better way to handle strings. Instead of single or double quotes, they use backticks (``).
+
+
+
+**(I’m doing the entire assignment using my own intelligence, and occasionally I watch the module videos.)**
+GitHub Repository Link: https://github.com/almahmudzihad/Github-Issue-Traker
+Live Site Link: https://almahmudzihad.github.io/Github-Issue-Traker 
+LinkedIn profile: www.linkedin.com/in/AlMahmudZihad 
