@@ -37,12 +37,24 @@ function activeRemove(id) {
         issueCount.textContent = closeSection.children.length;
    }
 };
+const showSpinner = (status) => {
+    const spinner = document.getElementById('spinner');
+    const mainContent = document.getElementById('mainContent');
+    if (status === 'show') {
+        spinner.classList.remove('hidden');
+        mainContent.classList.add('hidden');
+    } else {
+        spinner.classList.add('hidden');
+        mainContent.classList.remove('hidden');
+    }
+}
 const createElement = (arr) => {
     const htmlElement = arr.map(el => `<span class="bg-yellow-200 p-1 m-1 rounded-md"><i class="fa-solid fa-virus"></i></i> ${el}</span>`).join(' ');
     return htmlElement;
 };
 
 const issueLoad = () => {
+    showSpinner('show');
     fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
     .then(response => response.json())
     .then(data => {
@@ -58,6 +70,7 @@ issueLoad();
 
 
 const displayIssues = (data) => {
+    showSpinner('show');
     const issueContainer = document.getElementById('issueContainer');
     issueContainer.innerHTML = '';
    data.forEach(issue => {
@@ -87,8 +100,10 @@ const displayIssues = (data) => {
         `;
         issueContainer.appendChild(issueDiv);
    });
+   showSpinner('hide');
 }   
 const displayOpenIssues = (data) => {
+    showSpinner('show');
     const issueContainer = document.getElementById('openIssues');
     issueContainer.innerHTML = '';
    data.forEach(issue => {
@@ -117,9 +132,10 @@ const displayOpenIssues = (data) => {
         
         
    });
-
+showSpinner('hide');
 }
 const displayClosedIssues = (data) => {
+    showSpinner('show');
     const issueContainer = document.getElementById('closedIssues');
     issueContainer.innerHTML = '';
    data.forEach(issue => {
@@ -148,7 +164,7 @@ const displayClosedIssues = (data) => {
         
         
    });
-
+showSpinner('hide');
 }
 const modalLoad = (id) => {
     const url =`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
